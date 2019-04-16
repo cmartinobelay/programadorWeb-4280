@@ -104,3 +104,15 @@ console.log('Estoy aquí!')
 //   value = firstName[i]
 //   console.log(value)
 // }
+
+// Trabajando re tranquilo local
+
+// Test
+
+// Mini ejercicio
+
+var password
+
+do {
+  password = prompt('Ingresá contraseña')
+} while (!password)
