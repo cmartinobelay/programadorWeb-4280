@@ -1,0 +1,5 @@
+Validar Codigo Postal (con blur)
+- Que sea un numero
+- Que sea > a 1000
+- Que sea < a 9999
+- Que exista

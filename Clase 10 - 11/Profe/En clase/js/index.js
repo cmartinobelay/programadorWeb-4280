@@ -1,6 +1,6 @@
 console.log('Primer workshop')
 
-// Busco si hay algo en el LS y sino hay me devuelve un Array vacio
+// Busco si hay algo en el LS
 var studentsList = getLocalList('list')
 
 // Busco el campo nombre y DNI en el DOM y el botón agregar
@@ -35,7 +35,6 @@ function deleteStudent () {
     var index = searchStudentIndexByDni(dniValue, studentsList)
 
     if (index !== -1) {
-      // Elimino en memoria
       studentsList.splice(index, 1)
 
       // Actualizo la info del local storage con la info en memoria
