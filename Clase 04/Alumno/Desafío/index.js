@@ -1,3 +1,4 @@
+console.log('Hola')
 var studentsList = [
   {
     firstName: 'Juan',
@@ -21,15 +22,15 @@ var studentsList = [
   }
 ]
 
-var result = getPosition('Fernandez', students)
+var result = getPosition('Fernandez', studentsList)
 
 console.log('La posición del estudiante Fernandez es ' + result)
 
-function getPosition (lastName, studentsArray) {
+function getPosition (lastName, studentsList) {
   var student
   var total = 0
-  for (var i = 0; i < studentsArray.length; i++) {
-    student = studentsArray[i]
+  for (var i = 0; i < studentsList.length; i++) {
+    student = studentsList[i]
 
     if (student.lastName === lastName) {
       return i
