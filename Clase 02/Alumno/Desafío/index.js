@@ -1,23 +1,28 @@
-var gender = prompt('Ingrese su genero')
+var gender = prompt('Ingrese su genero, male, female u other')
 var age = prompt('Ingrese su edad')
-var mensage = ''
+var mensage = 'Hola, '
 
 switch (gender) {
-  case 'mujer':
+  case 'female':
     console.log('Sra')
     break
 
-  case 'hombre':
+  case 'male':
     console.log('Sr')
     break
 
-  default:
+  case 'other':
     console.log('Sx')
     break
+  default:
+    message = mensage + 'Genero invalido'
+  
 }
 
 if (age >= 18) {
-  console.log('usted es mayor de edad puede ingresar')
-} else {
-  console.log('usted es menor de edad no puede ingresar')
+  message = mensage + 'usted es mayor de edad puede ingresar'
+} else { (age >= 18)
+  message = message + 'usted es menor de edad no puede ingresar'
 }
+
+console.log(mensage)

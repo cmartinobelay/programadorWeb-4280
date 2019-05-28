@@ -14,7 +14,7 @@ var deleteStudentButton = document.getElementById('deleteStudentButton')
 var mainListNode = document.getElementById('mainList')
 var searchStudentButton = document.getElementById('searchStudentButton')
 var searchText = document.getElementById('searchText')
-var searchList = document.getElementById('searchList')
+var searchList = document.getElementById('sear chList')
 
 // Carga incial de los elementos en el DOM
 for (var i = 0; i < studentsList.length; i++) {
