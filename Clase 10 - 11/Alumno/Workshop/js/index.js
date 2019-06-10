@@ -26,42 +26,28 @@ for (var i = 0; i < studentsList.length; i++) {
 // Respondo al evento on blur con la función que valida el campo nombre y DNI
 firstNameInput.onblur = validateRequired
 dniInput.onblur = validateDni
-emailInput.onblur = validateRequired
+// emailInput.onblur = validateRequired
 
 // Con el botón validado llamo a la función que agrega el estudiante
 addStudentButton.onclick = addStudent
 deleteStudentButton.onclick = deleteStudent
-searchStudentButton.onclick = searchStudentIndexByText
-searchText.onclick = searchStudentIndexByText
+searchStudentButton.onclick = searchStudent
+// searchText.onclick = searchStudentIndexByText
 
-function searchStudentIndexByText () {
-  var index = -1
-  for (var i = 0; i < studentsList.length; i++) {
+function searchStudent () {
+  var text = searchTextInput.value
+  var index = searchStudentIndexByText(text, studentsList)
+
+  searchListNode.innerHTML= ''
+
+  if (index !== -1) {
     var student = studentsList[i]
-    if (student.firstName === text || student.lastName === text) {
-      index = i
-      break
-    }
-  }
-  return index
-}
-
-function includesText () {
-  // Valido que ambos parámetros sean string
-  if (typeof text === 'string' && typeof baseText === 'string') {
-    // Verifico si el primer parámetro se encuentra dentro del segundo
-    var textUpperCase = text.toUpperCase()
-    var baseTextUpperCase = baseText.toUpperCase()
-
-    if (baseTextUpperCase.indexOf(textUpperCase) !== -1) {
-      return true
-    } else {
-      return false
-    }
-  } else {
-    return false
+    var liSearch = createStudentNode(student)
+    searchListNode.appendChild(liSearch)
   }
 }
+
+
 
 function deleteStudent () {
   // Busco el valor en input a eliminar
@@ -94,15 +80,15 @@ function addStudent () {
   // Levanto los valores ya validados del form
   var firstNameValue = firstNameInput.value
   var dniValue = dniInput.value
-  var lastName = lastNameInput.value
-  var emailValue = emailInput.value
+  // var lastName = lastNameInput.value
+  // var emailValue = emailInput.value
 
   // Creo un objeto estudiante temporal
   var student = {
     firstName: firstNameValue,
     dni: dniValue,
-    lastName: lastNameValue,
-    email: emailValue
+    // lastName: lastNameValue,
+    // email: emailValue
   }
 
   // Agrego el estudiante en memoria
@@ -120,36 +106,36 @@ function addStudent () {
   // Limpiamos el formulario, los valores en String vacío
   firstNameInput.value = ''
   dniInput.value = ''
-  lastNameInput.value = ''
-  emailInput.value = ''
+  // lastNameInput.value = ''
+  // emailInput.value = ''
 
   // Saco las clases validas
   firstNameInput.classList.remove('is-valid')
   dniInput.classList.remove('is-valid')
-  lastNameInput.remove('is-valid')
-  emailInput.remove('is-valid')
+  // lastNameInput.remove('is-valid')
+  // emailInput.remove('is-valid')
 
   // Vuelvo a deshabilitar el botón
   addStudentButton.disabled = true
-  deleteStudentButton.disabled = true
-  searchStudentButton.disabled = true
+  // deleteStudentButton.disabled = true
+  // searchStudentButton.disabled = true
 }
 
-function validateEmailField (event) {
-  var inputNode = event.target
+// // function validateEmailField (event) {
+//   var inputNode = event.target
 
-  if (
-    !inputNode.value ||
-    inputNode.value.indexOf('@') === -1 ||
-    inputNode.value.indexOf('.') === -1
-  ) {
-    inputNode.classList.remove('is-valid')
-    inputNode.classList.add('is-invalid')
-  } else {
-    inputNode.classList.remove('is-invalid')
-    inputNode.classList.add('is-valid')
-  }
-}
+//   if (
+//     !inputNode.value ||
+//     inputNode.value.indexOf('@') === -1 ||
+//     inputNode.value.indexOf('.') === -1
+//   ) {
+//     inputNode.classList.remove('is-valid')
+//     inputNode.classList.add('is-invalid')
+//   } else {
+//     inputNode.classList.remove('is-invalid')
+//     inputNode.classList.add('is-valid')
+//   }
+// }
 
 function validateDni (event) {
   // Encuetro que nodo disparó el evento blur
@@ -269,9 +255,9 @@ function createStudentNode (newStudent) {
   // Le setteo la clase al nodo
   liNode.className = 'list-group-item'
 
-  liNode.classLastName = 'list-group-item'
+  // liNode.classLastName = 'list-group-item'
 
-  liNode.classEmail = 'list-group-item'
+  // liNode.classEmail = 'list-group-item'
 
   var fullName = ''
 
@@ -317,3 +303,37 @@ function searchStudentIndexByDni (dni, studentsList) {
   }
   return index
 }
+
+function includesText () {
+  // Valido que ambos parámetros sean string
+  if (typeof text === 'string' && typeof baseText === 'string') {
+    // Verifico si el primer parámetro se encuentra dentro del segundo
+    var textUpperCase = text.toUpperCase()
+    var baseTextUpperCase = baseText.toUpperCase()
+
+    if (baseTextUpperCase.indexOf(textUpperCase) !== -1) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+}
+function searchStudentIndexByText (text, studentsList) {
+  var index = -1
+  for (var i = 0; i < studentsList.length; i++) {
+    var student = studentsList[i]
+    if (
+      // student.firstName === text ||
+      includesText(text, student.firstName) ||
+      // student.lastName === text
+      includesText(text, student.lastName)
+    ) {
+      index = i
+      break
+    }
+  }
+  return index
+}
+
