@@ -1,32 +1,27 @@
 import crossroads from 'crossroads'
-import contactControllers from './controllers/contactControllers'
+import contactController from './controllers/contactController'
+import localStorageController from './controllers/localStorageController'
 
 function router () {
   crossroads.addRoute('', function () {
-    console.log('Home page')
-    $('#root').load('./partials/home.html', function(){
-      console.log('Se cargo la home')
+    $('#root').load('./partials/home.html', function () {
+      console.log('Home page')
     })
   })
-  
-  crossroads.addRoute('/#/people', function () {
-    $('#root').load('./partials/people.html', function(){
+
+  crossroads.addRoute('#/people', function () {
+    $('#root').load('./partials/people.html', function () {
       console.log('People page')
     })
   })
 
-  
-  crossroads.addRoute('/#/local-storage', function () {
-    $('#root').load('./partials/local-storage.html', function(){
-      console.log('LS page')
-    })
-  })
-  
-  crossroads.addRoute('#/contact', function () {
-    $('#root').load('./partials/contact.html', contactControllers)
-    
+  crossroads.addRoute('#/local-storage', function () {
+    $('#root').load('./partials/local-storage.html', localStorageController)
   })
 
+  crossroads.addRoute('#/contact', function () {
+    $('#root').load('./partials/contact.html', contactController)
+  })
 
   // En cada cambio del # va a verificar las rutas
   $(window).on('hashchange', function () {
